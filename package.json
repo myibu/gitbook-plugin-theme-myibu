@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-theme-myibu",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "myibu blog's gitbook theme",
   "engines": {
     "gitbook": ">2.5.0"
@@ -13,6 +13,11 @@
         "description": "It defines my awesome config!"
       }
     }
+  },
+  "homepage": "https://github.com/myibu/gitbook-plugin-theme-myibu",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/myibu/gitbook-plugin-theme-myibu.git"
   },
   "author": "myibu",
   "license": "ISC"

@@ -1,0 +1,19 @@
+{
+  "name": "gitbook-plugin-theme-myibu",
+  "version": "0.0.1",
+  "description": "myibu blog's gitbook theme",
+  "engines": {
+    "gitbook": ">2.5.0"
+  },
+  "gitbook": {
+    "properties": {
+      "myConfigKey": {
+        "type": "string",
+        "default": "default value",
+        "description": "It defines my awesome config!"
+      }
+    }
+  },
+  "author": "myibu",
+  "license": "ISC"
+}

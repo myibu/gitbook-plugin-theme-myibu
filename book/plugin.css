@@ -1,0 +1,196 @@
+/** code插件 */
+.myibu-code-wrapper {
+    position: relative;
+    background: #2d2d2d;
+    color: #ffffff;
+    border-radius: 4px;
+    counter-reset: line;
+    margin-top: 30px;
+    padding: 10px 0;
+}
+.myibu-code {
+    display: block;
+    background-color: #2d2d2d !important;
+    font-size: 12px;
+}
+
+.myibu-code-line {
+    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+.myibu-code-line:before {
+    display: inline-block;
+    width: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-right: 1.2em;
+    counter-increment: line;
+    content: counter(line);
+    border-right: 1px solid #8a8a8a;
+    color: #8a8a8a;
+    text-align: right;
+    height: 100%;
+}
+
+.myibu-code-copy {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: #9999AA;
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: none;
+    font-size: 13px;
+}
+
+code {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important; 
+}
+
+/** 图片放大插件*/
+.myibu-img-wrapper {
+    display: block;
+    position: fixed; 
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto;
+    background-color: rgba(0,0,0,.5); 
+}
+
+.myibu-img-popup {
+    margin: auto;
+    display: block;
+    border-radius: 4px;
+    padding-top: 100px;
+    height: 90%;
+    cursor: zoom-out;
+    transition: transform .2s ease-in-out;
+    transform-origin: 0 0;
+}
+
+.myibu-img {
+    cursor: zoom-in;
+    transition: all .15s linear;
+}
+
+/** 章节目录折叠 */
+.myibu-chapter-span {
+    display: inline-block !important;
+    padding: 10px 0px 10px 5px !important;
+    width: 85%;
+}
+
+.myibu-chapter-expand-btn {
+    display: inline-block !important;
+    padding: 10px 0px 10px 10px !important;
+    width: 30px;
+}
+.myibu-chapter-span:hover {
+    background: rgba(0, 0, 0, 0.03) !important;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+li.active > a {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important; 
+}
+
+li.active > a:hover {
+    background-color: #2d2d2d !important;
+    color: #ffffff !important; 
+}
+ 
+/** 页内导航 */
+.page-wrapper {
+    display: flex !important;
+    background: #e8eaed !important;
+}
+
+.page-inner {
+    display: flex !important;
+    flex: 8;
+    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background: #ffffff !important;
+}
+
+.myibu-page-inner-nav-wrapper {
+    display: flex;
+    box-sizing: border-box;
+    flex-basis: 300px;
+    margin: 40px;
+    height: 100%;
+}
+
+.myibu-page-inner-nav {
+    display: block;
+    width: 300px;
+    position: fixed;
+    right: 40px;
+    background: #ffffff !important;
+    padding: 15px;
+    height: 500px;
+    overflow:auto;
+}
+
+.myibu-page-inner-nav-title {
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
+}
+
+.myibu-page-inner-nav ul, .myibu-page-inner-nav li {
+    list-style: none;
+}
+
+.myibu-page-inner-nav > ul {
+    padding: 0px;
+}
+
+.myibu-page-inner-nav a {
+    display:block;
+    line-height: 30px;
+    height: 30px;
+    text-decoration: none;
+    color: #2d2d2d !important;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.myibu-page-inner-nav a:hover {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+/** 主题颜色 */
+.book {
+    background: #e8eaed !important;
+}
+.book-header {
+    background: #ffffff !important;
+}
+.book-summary {
+    background: #ffffff !important;
+}
+
+/** 隐藏左右导航 */
+.navigation {
+    display: none;
+}
+
+/** 隐藏gitbook-link*/
+.gitbook-link {
+    visibility: hidden;
+}

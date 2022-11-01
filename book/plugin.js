@@ -3,7 +3,7 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
     function handleCode() {
         $('pre').each(function() {
             var code = $(this).children('code');
-            var sourceCode = code.html();
+            var sourceCode = code.text();
             var lines = sourceCode.split('\n');
             // 删除多余空行
             if (lines[lines.length - 1] == '') {

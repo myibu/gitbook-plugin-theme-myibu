@@ -187,9 +187,11 @@ li.active > a:hover {
     color: #2d2d2d !important;
     overflow: hidden;
     text-overflow: ellipsis; 
+    padding-left: 5px;
 }
 
 .myibu-page-inner-nav a:hover {
+    border-left: 2px solid #2d2d2d !important;
     background: rgba(0, 0, 0, 0.03) !important;
 }
 

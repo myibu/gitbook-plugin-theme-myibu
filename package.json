@@ -1,6 +1,6 @@
 {
   "name": "gitbook-plugin-theme-myibu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "myibu blog's gitbook theme",
   "engines": {
     "gitbook": ">2.5.0"

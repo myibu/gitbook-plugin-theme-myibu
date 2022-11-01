@@ -114,33 +114,52 @@ li.active > a:hover {
 }
  
 /** 页内导航 */
-.page-wrapper {
-    display: flex !important;
+.book-body {
     background: #e8eaed !important;
+    display: flex !important;
+}
+
+.body-inner {
+    background: #e8eaed !important;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.book-header {
+    width: 100% !important;
+    height: 50px;
+}
+
+.page-wrapper {
+    background: #e8eaed !important;
+    display: flex !important;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink:0;
 }
 
 .page-inner {
-    display: flex !important;
-    flex: 8;
+    flex-grow: 1;
     padding: 20px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin: 30px auto;
     background: #ffffff !important;
+    max-width: 936px !important;
 }
 
 .myibu-page-inner-nav-wrapper {
-    display: flex;
-    box-sizing: border-box;
-    flex-basis: 300px;
-    margin: 40px;
+    width: 300px;
+    margin: 30px;
     height: 100%;
 }
 
 .myibu-page-inner-nav {
-    display: block;
     width: 300px;
     position: fixed;
-    right: 40px;
+    right: 30px;
     background: #ffffff !important;
     padding: 15px;
     height: 500px;

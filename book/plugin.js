@@ -4,7 +4,7 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         $('pre').each(function() {
             var code = $(this).children('code');
             var sourceCode = code.text();
-            var lines = sourceCode.split('\n');
+            var lines = code.html().split('\n');
             // 删除多余空行
             if (lines[lines.length - 1] == '') {
                 lines.splice(lines.length - 1, 1);

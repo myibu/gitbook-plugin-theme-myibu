@@ -128,11 +128,11 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
     function fillPageInnerNavDiv(h, parent) {
         if (h.children.length == 0) {
             if (!h.isRoot) {
-                parent.append($("<li><a href='#" + h.url + "'>" + h.url + "</a></li>"));
+                parent.append($("<li><a href='#" + h.url + "'>" + h.name + "</a></li>"));
             }
         } else {
             if (!h.isRoot) {
-                parent.append($("<li><a href='#" + h.url + "'>" + h.url + "</a></li>"));
+                parent.append($("<li><a href='#" + h.url + "'>" + h.name + "</a></li>"));
             }
             var subParent = $('<ul></ul>');
             parent.append(subParent);
@@ -145,15 +145,16 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
     /** 页内导航 */
     function handlePageInnerNav() {
         class PageInnerHeader {
-            constructor(level, url){
+            constructor(level, url, name){
                 this.level = level;
                 this.url = url;
+                this.name = name;
                 this.children = [];
                 this.isRoot = (level == 0);
             }
         }
         var headers = [];
-        var root = new PageInnerHeader(0, '');
+        var root = new PageInnerHeader(0, '', '');
         headers.push(root);
         $(':header').each(function (i, elem) {
             console.log(elem)
@@ -169,7 +170,7 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
                 }
                 // 最多处理3级目录
                 if (level < 4) {
-                    headers.push(new PageInnerHeader(level, $(elem).text()));
+                    headers.push(new PageInnerHeader(level, id, $(elem).text()));
                 }
             }
         });

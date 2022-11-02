@@ -105,6 +105,22 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
                 });
             });
        });
+
+       var showBtn =  $('<span class="iconfont icon-summary-hide myibu-chapter-show-btn" title="隐藏侧边栏"></span>');
+       showBtn.click(function(){
+        if (showBtn.attr('class').indexOf("icon-summary-hide") != -1) {
+            showBtn.removeClass("icon-summary-hide");
+            showBtn.addClass("icon-summary-show");
+            showBtn.attr('title', '展开侧边栏');
+            $('.book').removeClass("with-summary");
+        } else {
+            showBtn.removeClass("icon-summary-show");
+            showBtn.addClass("icon-summary-hide");
+            showBtn.attr('title', '隐藏侧边栏');
+            $('.book').addClass("with-summary");
+        }
+       })
+       $('.book').append(showBtn);
     }
 
     function fillPageInnerNavDiv(h, parent) {
@@ -172,12 +188,6 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         }
     }
 
-   /** 头部导航 */
-   function handleBookHeaderNav() {
-        var bookHeaderNavDiv = $('<div class="myibu-book-header-nav"></div>');
-        bookHeaderNavDiv.insertBefore($('.book'));
-   }
-
     gitbook.events.bind('start', function (e, config) {
         console.log(config)
     });
@@ -188,6 +198,5 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
        handleImgPopup();
        handleExpand();
        handlePageInnerNav();
-       handleBookHeaderNav();
     });
 });

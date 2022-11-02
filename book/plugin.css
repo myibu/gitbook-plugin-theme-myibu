@@ -104,23 +104,65 @@ code {
 }
 
 li.active > a {
-    background-color: #2d2d2d !important;
-    color: #ffffff !important; 
+    border-left: 2px solid #2d2d2d !important;
+    background: rgba(0, 0, 0, 0.03) !important;
 }
 
 li.active > a:hover {
-    background-color: #2d2d2d !important;
-    color: #ffffff !important; 
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+.myibu-chapter-show-btn {
+    display: block;
+    text-align: center;
+    line-height: 40px;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    top: 50vh;
+    border-radius: 40px;
+    background: #e8eaed;
+    color: #2d2d2d;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
+    z-index: 1005;
+}
+
+.icon-summary-hide {
+    left: 240px;
 }
  
+.icon-summary-show {
+    left: -20px;
+}
+
+.icon-summary-hide:hover, .icon-summary-show:hover {
+    cursor: pointer;
+}
+
 /** 页内导航 */
+.book {
+    background: #ffffff !important;
+}
+
+.book-header {
+    display: none;
+    width: 100% !important;
+    height: 50px;
+    background: #ffffff !important;
+}
+
+.book-summary {
+    background: #ffffff !important;
+}
+
 .book-body {
-    background: #e8eaed !important;
+    background: #ffffff !important;
     display: flex !important;
 }
 
 .body-inner {
-    background: #e8eaed !important;
+    background: #ffffff !important;
+    /** 上下flex布局 */
     display: flex !important;
     flex-direction: column;
     align-items: center;
@@ -128,50 +170,48 @@ li.active > a:hover {
     height: 100%;
 }
 
-.book-header {
-    width: 100% !important;
-    height: 50px;
-}
-
 .page-wrapper {
-    background: #e8eaed !important;
+    background: #ffffff !important;
+    /** 左右flex布局 */
     display: flex !important;
     flex-direction: row;
     width: 100%;
+    /** 自动扩充 */
     flex-grow: 1;
-    flex-shrink:0;
 }
 
 .page-inner {
-    flex-grow: 1;
-    padding: 20px;
-    margin: 30px auto;
-    background: #ffffff !important;
-    max-width: 936px !important;
+    /** 占75%空间 */
+    flex: 0 0 75%;
+    max-width: 75%;
+    padding: 50px;
 }
 
 .myibu-page-inner-nav-wrapper {
-    width: 300px;
-    margin: 30px;
-    height: 100%;
+    /** 占25%空间 */
+    flex: 0 0 25%;
+    max-width: 25%;
 }
 
 .myibu-page-inner-nav {
-    width: 300px;
     position: fixed;
-    right: 30px;
-    background: #ffffff !important;
-    padding: 15px;
-    height: 500px;
-    overflow:auto;
+    top: 60px;
+    border-left: #ebebeb solid 2px;
+    padding: 0 20px;
+    overflow-y: auto;
+    min-width: 20rem;
+    max-width: 30rem;
+    max-height: 80vh;
+
 }
 
 .myibu-page-inner-nav-title {
-    border-bottom: 1px solid #dddddd;
-    padding-bottom: 10px;
+    /** 字体变粗 */
+    font-weight: bold;
 }
 
 .myibu-page-inner-nav ul, .myibu-page-inner-nav li {
+    /** 去除项目符号*/
     list-style: none;
 }
 
@@ -181,13 +221,18 @@ li.active > a:hover {
 
 .myibu-page-inner-nav a {
     display:block;
+    /** 设置行高 */
     line-height: 30px;
     height: 30px;
+    /** 去掉a标签的下划线 */
     text-decoration: none;
     color: #2d2d2d !important;
+    /** 超出字数使用省略号表示 */
     overflow: hidden;
     text-overflow: ellipsis; 
     padding-left: 5px;
+    /** 不换行 */
+    white-space:nowrap;
 }
 
 .myibu-page-inner-nav a:hover {
@@ -195,16 +240,6 @@ li.active > a:hover {
     background: rgba(0, 0, 0, 0.03) !important;
 }
 
-/** 主题颜色 */
-.book {
-    background: #e8eaed !important;
-}
-.book-header {
-    background: #ffffff !important;
-}
-.book-summary {
-    background: #ffffff !important;
-}
 
 /** 隐藏左右导航 */
 .navigation {

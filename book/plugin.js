@@ -3,43 +3,45 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
     function handleCode() {
         $('pre').each(function() {
             var code = $(this).children('code');
-            var sourceCode = code.text();
-            var lines = code.html().split('\n');
-            // 删除多余空行
-            if (lines[lines.length - 1] == '') {
-                lines.splice(lines.length - 1, 1);
+            if (code && code.html()) {
+                var sourceCode = code.text();
+                var lines = code.html().split('\n');
+                // 删除多余空行
+                if (lines[lines.length - 1] == '') {
+                    lines.splice(lines.length - 1, 1);
+                }
+                lines = lines.map(line => '<pre class="myibu-code-line">' + line + '</pre>');
+                // 创建一个新div元素
+                var codeWrapper = $('<div class="myibu-code-wrapper"></div>');
+                codeWrapper.append('<div class="myibu-code">\n' 
+                                    + lines.join('\n') 
+                                    + '</div>\n');
+                // 复制按钮
+                var codeCopy = $('<div class="myibu-code-copy">复制</div>');
+                codeCopy.click(function() {
+                    const textarea = document.createElement('textarea');
+                    textarea.setAttribute('readonly', 'readonly');
+                    textarea.value = sourceCode;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    codeCopy.text("复制成功")
+                    document.body.removeChild(textarea);
+                    // 倒计时恢复
+                    window.setTimeout(function(){codeCopy.text("复制")}, 1000);
+                });
+
+                codeWrapper.append(codeCopy);
+
+                // 复制按钮隐藏
+                codeWrapper.hover(function(){
+                    codeCopy.show();
+                },function(){
+                    codeCopy.hide();
+                });
+                
+                $(this).replaceWith(codeWrapper);
             }
-            lines = lines.map(line => '<pre class="myibu-code-line">' + line + '</pre>');
-            // 创建一个新div元素
-            var codeWrapper = $('<div class="myibu-code-wrapper"></div>');
-            codeWrapper.append('<div class="myibu-code">\n' 
-                                + lines.join('\n') 
-                                + '</div>\n');
-            // 复制按钮
-            var codeCopy = $('<div class="myibu-code-copy">复制</div>');
-            codeCopy.click(function() {
-                const textarea = document.createElement('textarea');
-                textarea.setAttribute('readonly', 'readonly');
-                textarea.value = sourceCode;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                codeCopy.text("复制成功")
-                document.body.removeChild(textarea);
-                // 倒计时恢复
-                window.setTimeout(function(){codeCopy.text("复制")}, 1000);
-            });
-
-            codeWrapper.append(codeCopy);
-
-            // 复制按钮隐藏
-            codeWrapper.hover(function(){
-                codeCopy.show();
-            },function(){
-                codeCopy.hide();
-            });
-            
-            $(this).replaceWith(codeWrapper);
         });
     }
 
@@ -154,8 +156,9 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         var root = new PageInnerHeader(0, '');
         headers.push(root);
         $(':header').each(function (i, elem) {
+            console.log(elem)
             var id = $(elem).attr('id');
-            if (id) {
+            if (id && $(elem).text()) {
                 var level = 4;
                 if ($(elem).is('h1')) {
                     level = 1;
@@ -166,7 +169,7 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
                 }
                 // 最多处理3级目录
                 if (level < 4) {
-                    headers.push(new PageInnerHeader(level, id));
+                    headers.push(new PageInnerHeader(level, $(elem).text()));
                 }
             }
         });

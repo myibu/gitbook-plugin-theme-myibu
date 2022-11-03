@@ -106,6 +106,7 @@ code {
 li.active > a {
     border-left: 2px solid #2d2d2d !important;
     background: rgba(0, 0, 0, 0.03) !important;
+    color: #000000 !important;
 }
 
 li.active > a:hover {
@@ -147,17 +148,19 @@ li.active > a:hover {
 .book-header {
     display: none;
     width: 100% !important;
-    height: 50px;
+    height: 70px;
     background: #ffffff !important;
 }
 
 .book-summary {
     background: #ffffff !important;
+    top: 70px;
 }
 
 .book-body {
     background: #ffffff !important;
     display: flex !important;
+    top: 70px;
 }
 
 .body-inner {
@@ -195,7 +198,7 @@ li.active > a:hover {
 
 .myibu-page-inner-nav {
     position: fixed;
-    top: 60px;
+    top: 70px;
     border-left: #ebebeb solid 2px;
     padding: 0 20px;
     overflow-y: auto;
@@ -249,4 +252,77 @@ li.active > a:hover {
 /** 隐藏gitbook-link*/
 .gitbook-link {
     visibility: hidden;
+}
+
+/** 菜单导航 */
+.myibu-top-menu {
+    display: flex;
+    flex-direction: row;
+    /** 水平主轴居中 */
+    justify-content: center;
+    /** 垂直交叉轴居中 */
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    right: 0;
+    height: 48px;
+    box-shadow:  0 2px 8px rgba(0, 0, 0, .15);
+}
+
+.myibu-top-menu ul {
+    height: 48px;
+    margin: 0;
+    padding: 0;
+}
+
+.myibu-top-menu li {
+    float: left;
+    list-style: none;
+    line-height: 48px;
+    padding: 0 1.5em;
+    color: #858585;
+}
+
+.myibu-top-menu li a {
+    color: rgba(0,0,0,.7);
+    padding: 5px 0;
+}
+
+.myibu-top-menu li a:hover {
+    border-bottom: 2px solid #2d2d2d !important;
+}
+
+.myibu-top-menu-active {
+    color: #2d2d2d !important;
+    border-bottom: 2px solid #2d2d2d !important;
+}
+
+/** 搜索框 */
+.myibu-top-menu-actions {
+    float: left;
+}
+
+#book-search-input {  
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 5px !important;
+    min-width: 15rem;
+    max-width: 20rem;
+    height: 40px !important;
+    border: 1px solid #ebebeb !important;
+}
+
+/** 响应式布局 */
+@media screen and (max-width: 600px) {
+    .page-inner {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+    
+    .myibu-page-inner-nav-wrapper {
+        flex: 0 0 0%;
+        max-width: 0%;
+    }
 }

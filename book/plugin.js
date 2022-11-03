@@ -109,6 +109,17 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
        });
 
        var showBtn =  $('<span class="iconfont icon-summary-hide myibu-chapter-show-btn" title="隐藏侧边栏"></span>');
+       if (isMobileDevice()) {
+            showBtn.removeClass("icon-summary-hide");
+            showBtn.addClass("icon-summary-show");
+            showBtn.attr('title', '展开侧边栏');
+            $('.book').removeClass("with-summary");
+       } else {
+            showBtn.removeClass("icon-summary-show");
+            showBtn.addClass("icon-summary-hide");
+            showBtn.attr('title', '隐藏侧边栏');
+            $('.book').addClass("with-summary");
+       }
        showBtn.click(function(){
         if (showBtn.attr('class').indexOf("icon-summary-hide") != -1) {
             showBtn.removeClass("icon-summary-hide");
@@ -123,6 +134,11 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         }
        })
        $('.book').append(showBtn);
+    }
+
+    /** 移动设备，小屏 */
+    function isMobileDevice() {
+        return $(window).width() <= 600;
     }
 
     function fillPageInnerNavDiv(h, parent) {
@@ -192,15 +208,56 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         }
     }
 
+    /** 菜单栏导航 */
+    function handleTopMenu(config) {
+        // 先移除菜单栏
+        var searchDiv = $('div#book-search-input');
+        $('nav.myibu-top-menu').remove()
+        var topMenus = [];
+        // 默认添加首页菜单
+        topMenus.push({"url": "/", "name": "首页"});
+        // 小屏幕只显示“首页”
+        if (!isMobileDevice()) {
+            if (config && config.topMenus && (config.topMenus instanceof Array)) {
+                config.topMenus.forEach((item, index) => {
+                    topMenus.push(item);
+                });
+            }
+        }
+        var topMenuDiv = $('<nav class="myibu-top-menu"></nav>');
+        var topMenuUl  = $('<ul></ul>');
+        topMenus.forEach((item, index) => {
+            // 默认首页是激活状态
+            if (item.url == '/') {
+                topMenuUl.append($("<li><a class='myibu-top-menu-active' href='" + item.url + "'>" + item.name + "</a></li>"));
+            } else {
+                topMenuUl.append($("<li><a href='" + item.url + "'>" + item.name + "</a></li>"));
+            }
+        })
+        topMenuDiv.append(topMenuUl);
+        
+        var topActionsDiv = $('<div class="myibu-top-menu-actions"></div>');
+        topActionsDiv.append(searchDiv);
+        topMenuDiv.append(topActionsDiv)
+        // 添加至book元素第一个
+        topMenuDiv.prependTo($('.book'));
+    }
+
+    function onPageChanged(config) {
+        handleCode();
+        handleImgPopup();
+        handleExpand();
+        handlePageInnerNav();
+        handleTopMenu(config);
+    }
+
     gitbook.events.bind('start', function (e, config) {
-        console.log(config)
+        var myibuConfig = config.myibuConfig;
+        handleTopMenu(myibuConfig);
     });
-    
-    
+
     gitbook.events.bind("page.change", function() {
-       handleCode();
-       handleImgPopup();
-       handleExpand();
-       handlePageInnerNav();
+        var myibuConfig = gitbook.state.config.pluginsConfig.myibuConfig;
+        onPageChanged(myibuConfig);
     });
 });

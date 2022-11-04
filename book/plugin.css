@@ -88,15 +88,16 @@ code {
 /** 章节目录折叠 */
 .myibu-chapter-span {
     display: inline-block !important;
-    padding: 10px 0px 10px 5px !important;
-    width: 85%;
+    /* padding: 10px 0px 10px 5px !important; */
+    width: 90%;
 }
 
 .myibu-chapter-expand-btn {
-    display: inline-block !important;
-    padding: 10px 0px 10px 10px !important;
-    width: 30px;
+    display: inline-block !important; 
+    width: 24px;
+    padding: 0 10px !important;
 }
+
 .myibu-chapter-span:hover {
     background: rgba(0, 0, 0, 0.03) !important;
     cursor: pointer;
@@ -124,19 +125,22 @@ li.active > a:hover {
     border-radius: 40px;
     background: #e8eaed;
     color: #2d2d2d;
+    font-size: 20px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
     z-index: 1005;
 }
 
-.icon-summary-hide {
+.fa-angle-left {
     left: 240px;
 }
  
-.icon-summary-show {
+.fa-angle-right {
     left: -20px;
+    width: 60px;
+    padding-left: 20px;
 }
 
-.icon-summary-hide:hover, .icon-summary-show:hover {
+.fa-angle-left:hover, .fa-angle-right:hover {
     cursor: pointer;
 }
 

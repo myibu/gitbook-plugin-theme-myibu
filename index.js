@@ -5,8 +5,7 @@ module.exports = {
           'plugin.js'
         ],
         css: [
-          'plugin.css',
-          'iconfont/iconfont.css'
+          'plugin.css'
         ]
     },
     // Map of hooks

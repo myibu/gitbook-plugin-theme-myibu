@@ -73,62 +73,67 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
     function handleExpand() {
         $('.chapter').each(function() {
             var _this = $(this);
+            // 添加展开按钮
+            var firstElement = _this.children()[0];
+            $(firstElement).addClass("myibu-chapter-span");
+            var expandBtn = $('<i class="myibu-chapter-expand-btn"></i>');
+            // 需要icon
             var ulElements =  _this.children("ul");
             if (ulElements.length > 0) {
-                var firstElement = _this.children()[0];
-                $(firstElement).addClass("myibu-chapter-span");
-                var expandBtn =  $('<span class="iconfont icon-expand myibu-chapter-expand-btn"></span>');
-                expandBtn.insertBefore($(firstElement));
-                $(ulElements[0]).hide();
-                expandBtn.click(function(){
-                    if (expandBtn.attr('class').indexOf("icon-expanded") != -1) {
-                        expandBtn.removeClass("icon-expanded");
-                        expandBtn.addClass("icon-expand");
+                expandBtn.addClass("myibu-chapter-expand-icon fa fa-plus-square-o");
+                expandBtn.click(function() {
+                    if (expandBtn.attr('class').indexOf("fa-minus-square-o") != -1) {
+                        expandBtn.removeClass("fa-minus-square-o");
+                        expandBtn.addClass("fa-plus-square-o");
                         $(ulElements[0]).hide();
                     } else {
-                        expandBtn.removeClass("icon-expand");
-                        expandBtn.addClass("icon-expanded");
+                        expandBtn.removeClass("fa-plus-square-o");
+                        expandBtn.addClass("fa-minus-square-o");
                         $(ulElements[0]).show();
                     }
-                })
-            } else {
-                var firstElement = _this.children()[0];
-                $(firstElement).addClass("myibu-chapter-span");
-                $('<span class="myibu-chapter-expand-btn"></span>').insertBefore($(firstElement));
-            }
-            // 显示选中
-            $('.active').parents().filter(".chapter").each(function(){
-                $(this).children('span.myibu-chapter-expand-btn').each(function() {
-                    $(this).removeClass("icon-expand");
-                    $(this).addClass("icon-expanded");
                 });
-                $(this).children().each(function() {
-                    $(this).show(); 
+                // 默认不展开
+                $(ulElements[0]).hide();
+            }
+            // 添加到元素内
+            expandBtn.prependTo($(firstElement));
+       });
+        // 显示选中
+        $('.active').parents().each(function() {
+            // 选中的元素父级目录均展开
+            $(this).show(); 
+            // 处理icon
+            $(this).filter(".chapter").each(function(){
+                var firstElement = $(this).children()[0];
+                $(firstElement).children().filter('i.myibu-chapter-expand-icon').each(function() {
+                    $(this).removeClass("fa-plus-square-o");
+                    $(this).addClass("fa-minus-square-o");
                 });
             });
-       });
+        });
 
-       var showBtn =  $('<span class="iconfont icon-summary-hide myibu-chapter-show-btn" title="隐藏侧边栏"></span>');
+        // 隐藏侧边栏
+       var showBtn =  $('<i class="fa fa-angle-left myibu-chapter-show-btn" title="隐藏侧边栏"></i>');
        if (isMobileDevice()) {
-            showBtn.removeClass("icon-summary-hide");
-            showBtn.addClass("icon-summary-show");
+            showBtn.removeClass("fa-angle-left");
+            showBtn.addClass("fa-angle-right");
             showBtn.attr('title', '展开侧边栏');
             $('.book').removeClass("with-summary");
        } else {
-            showBtn.removeClass("icon-summary-show");
-            showBtn.addClass("icon-summary-hide");
+            showBtn.removeClass("fa-angle-right");
+            showBtn.addClass("fa-angle-left");
             showBtn.attr('title', '隐藏侧边栏');
             $('.book').addClass("with-summary");
        }
        showBtn.click(function(){
-        if (showBtn.attr('class').indexOf("icon-summary-hide") != -1) {
-            showBtn.removeClass("icon-summary-hide");
-            showBtn.addClass("icon-summary-show");
+        if (showBtn.attr('class').indexOf("fa-angle-left") != -1) {
+            showBtn.removeClass("fa-angle-left");
+            showBtn.addClass("fa-angle-right");
             showBtn.attr('title', '展开侧边栏');
             $('.book').removeClass("with-summary");
         } else {
-            showBtn.removeClass("icon-summary-show");
-            showBtn.addClass("icon-summary-hide");
+            showBtn.removeClass("fa-angle-right");
+            showBtn.addClass("fa-angle-left");
             showBtn.attr('title', '隐藏侧边栏');
             $('.book').addClass("with-summary");
         }

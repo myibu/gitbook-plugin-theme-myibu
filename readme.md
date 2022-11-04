@@ -54,5 +54,8 @@ or config in your `book.json`
 - add chapter expand
 - add code
 
-### 0.0.9
+### ~~0.0.9~~
 - add top navigation menu
+
+### 0.0.10
+- replace iconfont with fontawesome(version 4.6.3, see https://fontawesome.com/v4/icons/)

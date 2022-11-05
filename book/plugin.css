@@ -4,22 +4,23 @@
     background: #2d2d2d;
     color: #ffffff;
     border-radius: 4px;
+    /** 添加行号计数*/
     counter-reset: line;
     margin-top: 30px;
-    padding: 10px 0;
 }
 .myibu-code {
     display: block;
     background-color: #2d2d2d !important;
     font-size: 12px;
+    /** 水平滚动*/
+    overflow-x: auto !important;
 }
 
 .myibu-code-line {
-    display: block;
-    padding: 0 !important;
-    margin: 0 !important;
     background-color: #2d2d2d !important;
     color: #ffffff !important;
+    /** 空白会被浏览器保留 */
+    white-space: pre !important;
 }
 
 .myibu-code-line:before {
@@ -29,6 +30,7 @@
     padding-right: 0.5em;
     margin-right: 1.2em;
     counter-increment: line;
+    /** 添加行号*/
     content: counter(line);
     border-right: 1px solid #8a8a8a;
     color: #8a8a8a;

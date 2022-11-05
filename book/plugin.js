@@ -10,12 +10,12 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
                 if (lines[lines.length - 1] == '') {
                     lines.splice(lines.length - 1, 1);
                 }
-                lines = lines.map(line => '<pre class="myibu-code-line">' + line + '</pre>');
+                lines = lines.map(line => '<span class="myibu-code-line">' + line + '</span>');
                 // 创建一个新div元素
                 var codeWrapper = $('<div class="myibu-code-wrapper"></div>');
-                codeWrapper.append('<div class="myibu-code">\n' 
+                codeWrapper.append('<pre class="myibu-code">\n' 
                                     + lines.join('\n') 
-                                    + '</div>\n');
+                                    + '</pre>\n');
                 // 复制按钮
                 var codeCopy = $('<div class="myibu-code-copy">复制</div>');
                 codeCopy.click(function() {

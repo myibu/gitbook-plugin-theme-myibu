@@ -248,12 +248,32 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         topMenuDiv.prependTo($('.book'));
     }
 
+    /** 页内导航 */
+    function handlePageHeader() {
+        var pageHeader = $('<div class="myibu-page-header"></div>');
+        if (gitbook.state.config.author) {
+            pageHeader.append($('<span><i class="fa fa-user" title="作者"></i> ' + gitbook.state.config.author + '</span>'));
+        } else {
+            pageHeader.append($('<span><i class="fa fa-user" title="作者"></i> ' + 匿名用户 + '</span>')); 
+        }
+        
+        pageHeader.append($('<span><i class="fa fa-columns" title="文章标题"></i> ' + gitbook.state.chapterTitle + '</span>'));
+        
+        var lastModifyTime = new Date(gitbook.state.file.mtime);
+        var lastModifyDate = lastModifyTime.getFullYear() + "年" + (lastModifyTime.getMonth()+1) + "月" + lastModifyTime.getDate() + "日";
+        pageHeader.append($('<span><i class="fa fa-calendar" title="最后修改于"></i> ' + lastModifyDate + '</span>'));
+        
+        pageHeader.append($('<hr>'));
+        pageHeader.prependTo($('.page-inner'));
+    }
+
     function onPageChanged(config) {
         handleCode();
         handleImgPopup();
         handleExpand();
         handlePageInnerNav();
         handleTopMenu(config);
+        handlePageHeader();
     }
 
     gitbook.events.bind('start', function (e, config) {

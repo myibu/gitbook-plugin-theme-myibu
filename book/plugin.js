@@ -218,9 +218,10 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         // 先移除菜单栏
         var searchDiv = $('div#book-search-input');
         $('nav.myibu-top-menu').remove()
+        var gitbookRoot = gitbook.state.root;
         var topMenus = [];
         // 默认添加首页菜单
-        topMenus.push({"url": "/", "name": "首页"});
+        topMenus.push({"url": gitbookRoot, "name": "首页"});
         // 小屏幕只显示“首页”
         if (!isMobileDevice()) {
             if (config && config.topMenus && (config.topMenus instanceof Array)) {
@@ -233,7 +234,7 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         var topMenuUl  = $('<ul></ul>');
         topMenus.forEach((item, index) => {
             // 默认首页是激活状态
-            if (item.url == '/') {
+            if (item.url == gitbookRoot) {
                 topMenuUl.append($("<li><a class='myibu-top-menu-active' href='" + item.url + "'>" + item.name + "</a></li>"));
             } else {
                 topMenuUl.append($("<li><a href='" + item.url + "'>" + item.name + "</a></li>"));

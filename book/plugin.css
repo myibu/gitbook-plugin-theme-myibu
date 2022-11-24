@@ -119,31 +119,38 @@ li.active > a:hover {
 .myibu-chapter-show-btn {
     display: block;
     text-align: center;
-    line-height: 40px;
-    position: relative;
-    width: 40px;
-    height: 40px;
-    top: 50vh;
-    border-radius: 40px;
-    background: #e8eaed;
-    color: #2d2d2d;
+    line-height: 50px;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 0;
+    left: 0;
+    color: #858585;
     font-size: 20px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
     z-index: 1005;
 }
 
-.fa-angle-left {
-    left: 240px;
-}
- 
-.fa-angle-right {
-    left: -20px;
-    width: 60px;
-    padding-left: 20px;
+.myibu-chapter-show-btn:hover {
+    color: #2d2d2d;
 }
 
-.fa-angle-left:hover, .fa-angle-right:hover {
+.fa-angle-double-left:hover, .fa-angle-double-right:hover {
     cursor: pointer;
+}
+
+.book-summary {
+    margin-bottom: 50px !important;
+    border-bottom: #ddd solid 1px !important;
+    border-right: 0px solid rgba(0,0,0,.07);
+}
+
+/** 隐藏导航下面的横线*/
+.divider {
+    display: none;
+}
+
+.book-body {
+    border-left: #ddd solid 1px !important;
 }
 
 /** 页内导航 */
@@ -345,4 +352,26 @@ hr {
 .myibu-page-header span {
     display: inline-block;
     padding: 0 1.5em 0 0;
+}
+
+/** splitter */
+.myibu-splitter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 12px;
+	display: table;
+	cursor: col-resize;
+    text-align: center;
+    z-index: 1004;
+    color: #ccc;
+}
+
+.myibu-splitter:hover {
+    color: #2d2d2d;
+}
+
+.myibu-splitter-icon {
+    line-height: 100vh;
 }

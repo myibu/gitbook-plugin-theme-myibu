@@ -111,34 +111,6 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
                 });
             });
         });
-
-        // 隐藏侧边栏
-       var showBtn =  $('<i class="fa fa-angle-left myibu-chapter-show-btn" title="隐藏侧边栏"></i>');
-       if (isMobileDevice()) {
-            showBtn.removeClass("fa-angle-left");
-            showBtn.addClass("fa-angle-right");
-            showBtn.attr('title', '展开侧边栏');
-            $('.book').removeClass("with-summary");
-       } else {
-            showBtn.removeClass("fa-angle-right");
-            showBtn.addClass("fa-angle-left");
-            showBtn.attr('title', '隐藏侧边栏');
-            $('.book').addClass("with-summary");
-       }
-       showBtn.click(function(){
-        if (showBtn.attr('class').indexOf("fa-angle-left") != -1) {
-            showBtn.removeClass("fa-angle-left");
-            showBtn.addClass("fa-angle-right");
-            showBtn.attr('title', '展开侧边栏');
-            $('.book').removeClass("with-summary");
-        } else {
-            showBtn.removeClass("fa-angle-right");
-            showBtn.addClass("fa-angle-left");
-            showBtn.attr('title', '隐藏侧边栏');
-            $('.book').addClass("with-summary");
-        }
-       })
-       $('.book').append(showBtn);
     }
 
     /** 移动设备，小屏 */
@@ -178,7 +150,6 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         var root = new PageInnerHeader(0, '', '');
         headers.push(root);
         $(':header').each(function (i, elem) {
-            console.log(elem)
             var id = $(elem).attr('id');
             if (id && $(elem).text()) {
                 var level = 4;
@@ -268,6 +239,101 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         pageHeader.prependTo($('.page-inner'));
     }
 
+    /** splitter */
+    function handleSplitter() {
+        var $splitter = $('<div class="myibu-splitter"><i class="fa fa-ellipsis-v myibu-splitter-icon"></i></div>');
+        // 获取splitter位置
+        var splitterPosition = $('.book-summary').outerWidth()
+        var splitterStorageStr = localStorage.getItem('_gitbook::theme-myibu::splitter')
+        if (splitterStorageStr) {
+            const splitterStorage = JSON.parse(splitterStorageStr)
+            splitterPosition = splitterStorage.position
+        }
+        // 初始化页面
+        $('.book-summary').css("width", splitterPosition)
+        $('.book-summary').css("left", 0)
+        $splitter.css("left", splitterPosition)
+        $('.book-body').css("left", splitterPosition)
+
+
+         // 隐藏侧边栏
+        var $showsummary =  $('<i class="fa fa-angle-double-left myibu-chapter-show-btn" title="隐藏侧边栏"></i>');
+
+        // 处理鼠标拖拽事件
+        var state = 'init';
+        $splitter.mousedown(function () {
+            state = 'moving';
+        })
+        $('.book').mousemove(function (event) {
+            if (state === 'moving') {
+                if (event.pageX > $showsummary.outerWidth()) {
+                    $showsummary.removeClass("fa-angle-double-right");
+                    $showsummary.addClass("fa-angle-double-left");
+                    $showsummary.attr('title', '隐藏侧边栏');
+                    $showsummary.css('left', event.pageX - $showsummary.outerWidth());
+                    $('.book-summary').css("width", event.pageX)
+                    $splitter.css("left", event.pageX)
+                    $('.book-body').css("left", event.pageX)
+                } else {
+                    $showsummary.removeClass("fa-angle-double-left");
+                    $showsummary.addClass("fa-angle-double-right");
+                    $showsummary.attr('title', '展开侧边栏');
+                }
+            }
+        })
+        $('.book').mouseup(function () {
+            if (state === 'moving') {
+                localStorage.setItem('_gitbook::theme-myibu::splitter', JSON.stringify({"position": $splitter.position().left}))
+            }
+            state = 'init';
+        })
+        $('.book').append($splitter);
+        $('.book').append($showsummary);
+
+        // 初始化隐藏栏
+       if (splitterPosition <= $showsummary.outerWidth()) {
+            $showsummary.removeClass("fa-angle-double-left");
+            $showsummary.addClass("fa-angle-double-right");
+            $showsummary.attr('title', '展开侧边栏');
+       } else {
+            $showsummary.removeClass("fa-angle-double-right");
+            $showsummary.addClass("fa-angle-double-left");
+            $showsummary.attr('title', '隐藏侧边栏');
+            $showsummary.css('left', splitterPosition - $showsummary.outerWidth());
+            $('.book-summary').css("width", splitterPosition)
+            $splitter.css("left", splitterPosition)
+            $('.book-body').css("left", splitterPosition)
+       }
+
+       $showsummary.click(function(){
+        if ($showsummary.attr('class').indexOf("fa-angle-double-left") != -1) {
+            $showsummary.removeClass("fa-angle-double-left");
+            $showsummary.addClass("fa-angle-double-right");
+            $showsummary.attr('title', '展开侧边栏');
+            $('.book-summary').css("width", $showsummary.outerWidth())
+            $splitter.css("left", $showsummary.outerWidth())
+            $('.book-body').css("left", $showsummary.outerWidth())
+            $showsummary.css('left', 0);
+        } else {
+            $showsummary.removeClass("fa-angle-double-right");
+            $showsummary.addClass("fa-angle-double-left");
+            $showsummary.attr('title', '隐藏侧边栏');
+
+            var splitterStorageStr = localStorage.getItem('_gitbook::theme-myibu::splitter')
+            var splitterPosition = 300
+            if (splitterStorageStr) {
+                const splitterStorage = JSON.parse(splitterStorageStr)
+                splitterPosition = splitterStorage.position
+            }
+            $('.book-summary').css("width", splitterPosition)
+            $splitter.css("left", splitterPosition)
+            $('.book-body').css("left", splitterPosition)
+            $showsummary.css('left', splitterPosition - $showsummary.outerWidth())
+        }
+       })
+       
+    }
+
     function onPageChanged(config) {
         handleCode();
         handleImgPopup();
@@ -275,6 +341,7 @@ require(["gitbook", "jQuery"], function(gitbook, $) {
         handlePageInnerNav();
         handleTopMenu(config);
         handlePageHeader();
+        handleSplitter();
     }
 
     gitbook.events.bind('start', function (e, config) {

@@ -60,7 +60,10 @@ or config in your `book.json`
 ### ~~0.0.10~~
 - replace iconfont with fontawesome(version 4.6.3, see https://fontawesome.com/v4/icons/)
 
-### 0.0.11
+### ~~0.0.11~~
 - fix bug: code can not scroll
 - add page header
 - fix bug: topMenu home link can not visit
+
+### 1.0.0
+- add splitter
